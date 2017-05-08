@@ -9,6 +9,13 @@
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
         <property name="connection.url">jdbc:mysql://localhost:6060/git_translate</property>
+        <mapping class="com.bsuir.translateService.entity.BranchEntity"/>
+        <mapping class="com.bsuir.translateService.entity.CommitEntity"/>
+        <mapping class="com.bsuir.translateService.entity.EmployeeEntity"/>
+        <mapping class="com.bsuir.translateService.entity.InvitationEntity"/>
+        <mapping class="com.bsuir.translateService.entity.RepositoryEntity"/>
+        <mapping class="com.bsuir.translateService.entity.UserEntity"/>
 
     </session-factory>
+
 </hibernate-configuration>

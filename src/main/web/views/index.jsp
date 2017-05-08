@@ -39,17 +39,13 @@
 <body>
     <table>
         <tr>
-            <th>ID</th>
             <th>Login</th>
-            <th>Phone</th>
             <th>Role</th>
         </tr>
 
         <c:forEach  var="user" items="${users}">
             <tr>
-                <td>${user.userId}</td>
                 <td>${user.login}</td>
-                <td>${user.phone}</td>
                 <td>${user.role}</td>
             </tr>
         </c:forEach>

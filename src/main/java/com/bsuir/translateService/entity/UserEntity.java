@@ -2,13 +2,12 @@ package com.bsuir.translateService.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Collection;
 
 /**
- * Created by Олег Пятко on 07.05.2017.
+ * Created by Олег Пятко on 08.05.2017.
  */
 @Entity
-@Table(name = "user", schema = "git_translate")
+@Table(name = "user", schema = "git_translate", catalog = "")
 public class UserEntity {
     private int idUser;
     private String login;
@@ -17,12 +16,9 @@ public class UserEntity {
     private Timestamp createTime;
     private String about;
     private String role;
-    private Collection<EmployeeEntity> employeesByIdUser;
-    private Collection<InvitationEntity> invitationsByIdUser;
-    private Collection<InvitationEntity> invitationsByIdUser_0;
 
     @Id
-    @Column(name = "idUser")
+    @Column(name = "idUser", nullable = false)
     public int getIdUser() {
         return idUser;
     }
@@ -32,7 +28,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "login")
+    @Column(name = "login", nullable = false, length = 16)
     public String getLogin() {
         return login;
     }
@@ -42,7 +38,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = 255)
     public String getEmail() {
         return email;
     }
@@ -52,7 +48,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "passwordHash")
+    @Column(name = "passwordHash", nullable = false, length = 32)
     public String getPasswordHash() {
         return passwordHash;
     }
@@ -62,7 +58,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "createTime")
+    @Column(name = "createTime", nullable = true)
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -72,7 +68,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "about")
+    @Column(name = "about", nullable = true, length = -1)
     public String getAbout() {
         return about;
     }
@@ -82,7 +78,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "role")
+    @Column(name = "role", nullable = true)
     public String getRole() {
         return role;
     }
@@ -119,32 +115,5 @@ public class UserEntity {
         result = 31 * result + (about != null ? about.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "userByIdUser")
-    public Collection<EmployeeEntity> getEmployeesByIdUser() {
-        return employeesByIdUser;
-    }
-
-    public void setEmployeesByIdUser(Collection<EmployeeEntity> employeesByIdUser) {
-        this.employeesByIdUser = employeesByIdUser;
-    }
-
-    @OneToMany(mappedBy = "userByIdInvitedUser")
-    public Collection<InvitationEntity> getInvitationsByIdUser() {
-        return invitationsByIdUser;
-    }
-
-    public void setInvitationsByIdUser(Collection<InvitationEntity> invitationsByIdUser) {
-        this.invitationsByIdUser = invitationsByIdUser;
-    }
-
-    @OneToMany(mappedBy = "userByIdInviter")
-    public Collection<InvitationEntity> getInvitationsByIdUser_0() {
-        return invitationsByIdUser_0;
-    }
-
-    public void setInvitationsByIdUser_0(Collection<InvitationEntity> invitationsByIdUser_0) {
-        this.invitationsByIdUser_0 = invitationsByIdUser_0;
     }
 }

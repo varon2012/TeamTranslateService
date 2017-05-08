@@ -1,22 +1,19 @@
 package com.bsuir.translateService.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 /**
- * Created by Олег Пятко on 07.05.2017.
+ * Created by Олег Пятко on 08.05.2017.
  */
 @Entity
-@Table(name = "branch", schema = "git_translate")
+@Table(name = "branch", schema = "git_translate", catalog = "")
 public class BranchEntity {
     private int idBranch;
     private String name;
-    private int idEmployee;
     private EmployeeEntity employeeByIdEmployee;
-    private Collection<CommitEntity> commitsByIdBranch;
 
     @Id
-    @Column(name = "idBranch")
+    @Column(name = "idBranch", nullable = false)
     public int getIdBranch() {
         return idBranch;
     }
@@ -26,23 +23,13 @@ public class BranchEntity {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = true, length = 45)
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Basic
-    @Column(name = "idEmployee")
-    public int getIdEmployee() {
-        return idEmployee;
-    }
-
-    public void setIdEmployee(int idEmployee) {
-        this.idEmployee = idEmployee;
     }
 
     @Override
@@ -53,7 +40,6 @@ public class BranchEntity {
         BranchEntity that = (BranchEntity) o;
 
         if (idBranch != that.idBranch) return false;
-        if (idEmployee != that.idEmployee) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
@@ -63,7 +49,6 @@ public class BranchEntity {
     public int hashCode() {
         int result = idBranch;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + idEmployee;
         return result;
     }
 
@@ -75,14 +60,5 @@ public class BranchEntity {
 
     public void setEmployeeByIdEmployee(EmployeeEntity employeeByIdEmployee) {
         this.employeeByIdEmployee = employeeByIdEmployee;
-    }
-
-    @OneToMany(mappedBy = "branchByIdBranch")
-    public Collection<CommitEntity> getCommitsByIdBranch() {
-        return commitsByIdBranch;
-    }
-
-    public void setCommitsByIdBranch(Collection<CommitEntity> commitsByIdBranch) {
-        this.commitsByIdBranch = commitsByIdBranch;
     }
 }

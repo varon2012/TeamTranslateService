@@ -4,20 +4,18 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by Олег Пятко on 07.05.2017.
+ * Created by Олег Пятко on 08.05.2017.
  */
 @Entity
-@Table(name = "commit", schema = "git_translate")
+@Table(name = "commit", schema = "git_translate", catalog = "")
 public class CommitEntity {
     private int idCommit;
     private String plainText;
     private String translatedText;
     private Timestamp createTime;
-    private int idBranch;
-    private BranchEntity branchByIdBranch;
 
     @Id
-    @Column(name = "idCommit")
+    @Column(name = "idCommit", nullable = false)
     public int getIdCommit() {
         return idCommit;
     }
@@ -27,7 +25,7 @@ public class CommitEntity {
     }
 
     @Basic
-    @Column(name = "plainText")
+    @Column(name = "plainText", nullable = true, length = -1)
     public String getPlainText() {
         return plainText;
     }
@@ -37,7 +35,7 @@ public class CommitEntity {
     }
 
     @Basic
-    @Column(name = "translatedText")
+    @Column(name = "translatedText", nullable = true, length = -1)
     public String getTranslatedText() {
         return translatedText;
     }
@@ -47,23 +45,13 @@ public class CommitEntity {
     }
 
     @Basic
-    @Column(name = "createTime")
+    @Column(name = "createTime", nullable = true)
     public Timestamp getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
-    }
-
-    @Basic
-    @Column(name = "idBranch")
-    public int getIdBranch() {
-        return idBranch;
-    }
-
-    public void setIdBranch(int idBranch) {
-        this.idBranch = idBranch;
     }
 
     @Override
@@ -74,7 +62,6 @@ public class CommitEntity {
         CommitEntity that = (CommitEntity) o;
 
         if (idCommit != that.idCommit) return false;
-        if (idBranch != that.idBranch) return false;
         if (plainText != null ? !plainText.equals(that.plainText) : that.plainText != null) return false;
         if (translatedText != null ? !translatedText.equals(that.translatedText) : that.translatedText != null)
             return false;
@@ -89,17 +76,6 @@ public class CommitEntity {
         result = 31 * result + (plainText != null ? plainText.hashCode() : 0);
         result = 31 * result + (translatedText != null ? translatedText.hashCode() : 0);
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
-        result = 31 * result + idBranch;
         return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "idBranch", referencedColumnName = "idBranch", nullable = false)
-    public BranchEntity getBranchByIdBranch() {
-        return branchByIdBranch;
-    }
-
-    public void setBranchByIdBranch(BranchEntity branchByIdBranch) {
-        this.branchByIdBranch = branchByIdBranch;
     }
 }

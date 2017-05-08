@@ -2,22 +2,19 @@ package com.bsuir.translateService.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Collection;
 
 /**
- * Created by Олег Пятко on 07.05.2017.
+ * Created by Олег Пятко on 08.05.2017.
  */
 @Entity
-@Table(name = "repository", schema = "git_translate")
+@Table(name = "repository", schema = "git_translate", catalog = "")
 public class RepositoryEntity {
     private int idRepository;
     private String name;
     private Timestamp createTime;
-    private Collection<EmployeeEntity> employeesByIdRepository;
-    private Collection<InvitationEntity> invitationsByIdRepository;
 
     @Id
-    @Column(name = "idRepository")
+    @Column(name = "idRepository", nullable = false)
     public int getIdRepository() {
         return idRepository;
     }
@@ -27,7 +24,7 @@ public class RepositoryEntity {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 45)
     public String getName() {
         return name;
     }
@@ -37,7 +34,7 @@ public class RepositoryEntity {
     }
 
     @Basic
-    @Column(name = "createTime")
+    @Column(name = "createTime", nullable = false)
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -66,23 +63,5 @@ public class RepositoryEntity {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "repositoryByIdRepository")
-    public Collection<EmployeeEntity> getEmployeesByIdRepository() {
-        return employeesByIdRepository;
-    }
-
-    public void setEmployeesByIdRepository(Collection<EmployeeEntity> employeesByIdRepository) {
-        this.employeesByIdRepository = employeesByIdRepository;
-    }
-
-    @OneToMany(mappedBy = "repositoryByIdRepository")
-    public Collection<InvitationEntity> getInvitationsByIdRepository() {
-        return invitationsByIdRepository;
-    }
-
-    public void setInvitationsByIdRepository(Collection<InvitationEntity> invitationsByIdRepository) {
-        this.invitationsByIdRepository = invitationsByIdRepository;
     }
 }
