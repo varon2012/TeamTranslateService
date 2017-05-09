@@ -30,7 +30,11 @@ public class UserRepositoryImpl extends BaseRepository implements UserRepository
         Session session = GetCurrentSession();
         Query query = session.createQuery("from UserEntity u where u.login = :login");
         query.setParameter("login", login);
-        return (UserEntity) query.list().get(0);
+        List<UserEntity> list = query.list();
+        if (list.size() != 0){
+            return list.get(0);
+        }
+        return null;
     }
 
     @Override
@@ -38,7 +42,11 @@ public class UserRepositoryImpl extends BaseRepository implements UserRepository
         Session session = GetCurrentSession();
         Query query = session.createQuery("from UserEntity u where u.idUser = :id");
         query.setParameter("id", id);
-        return (UserEntity) query.list().get(0);
+        List<UserEntity> list = query.list();
+        if (list.size() != 0){
+            return list.get(0);
+        }
+        return null;
     }
 
     @Override
@@ -54,33 +62,24 @@ public class UserRepositoryImpl extends BaseRepository implements UserRepository
     }
 
     @Override
-    public Integer createUser(UserEntity userEntity) {
+    public void createUser(UserEntity userEntity) {
         Session session = GetCurrentSession();
-        //session.beginTransaction();
 
-        Integer id = (Integer) session.save(userEntity);
-
-        //session.getTransaction().commit();
-
-        return id;
+        session.save(userEntity);
     }
 
     @Override
     public void updateUser(UserEntity userEntity) {
         Session session = GetCurrentSession();
-        session.beginTransaction();
 
         session.update(userEntity);
-
-        session.getTransaction().commit();
     }
 
     @Override
     public void deleteUser(UserEntity userEntity) {
         Session session = GetCurrentSession();
-        session.beginTransaction();
+
         session.delete(userEntity);
-        session.getTransaction().commit();
     }
 
     private Session GetCurrentSession(){

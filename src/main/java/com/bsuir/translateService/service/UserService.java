@@ -60,17 +60,20 @@ public class UserService{
 
     @Transactional
     public UserEntity createUser(UserEntity userEntity){
-        //validateUser(userEntity);
-        Integer id = userRepository.createUser(userEntity);
-        UserEntity user = userRepository.findById(id);
+        validateUser(userEntity);
+        userRepository.createUser(userEntity);
+        UserEntity user = userRepository.findByLogin(userEntity.getLogin());
         return user;
     }
 
     public void updateUser(UserEntity userEntity) {
-        validateUser(userEntity);
         userRepository.updateUser(userEntity);
     }
 
+    public void deleteUser(int id){
+        UserEntity userEntity = userRepository.findById(id);
+        userRepository.deleteUser(userEntity);
+    }
     private void validateUser(UserEntity userEntity){
         if (userEntity == null){
             throw new ServiceException("user can't be null");

@@ -15,7 +15,7 @@ public interface UserRepository {
     UserEntity findByLogin(String login);
     UserEntity findById(int id);
     UserEntity findByEmail(String email);
-    Integer createUser(UserEntity userEntity);
+    void createUser(UserEntity userEntity);
     void updateUser(UserEntity userEntity);
     void deleteUser(UserEntity userEntity);
 }

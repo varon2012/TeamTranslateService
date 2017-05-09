@@ -2,14 +2,14 @@ package com.bsuir.translateService.controller;
 
 import com.bsuir.translateService.entity.UserEntity;
 import com.bsuir.translateService.service.UserService;
+import com.bsuir.translateService.service.exception.ServiceException;
+import org.omg.PortableInterceptor.USER_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -20,48 +20,45 @@ public class UserController {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity<Iterable<UserEntity>> findAllUsers(){
-       //ModelAndView modelAndView = new ModelAndView("index");
-        //modelAndView.addObject("users",userService.findAll());
         Iterable<UserEntity> users = userService.findAll();
         return new ResponseEntity<Iterable<UserEntity>>(users, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/users_id", method = RequestMethod.GET)
-    public ResponseEntity<UserEntity> findUserById(){
-        //ModelAndView modelAndView = new ModelAndView("index");
-        //modelAndView.addObject("users",userService.findAll());
-        UserEntity users = userService.findById(1);
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public ResponseEntity<UserEntity> findUserById(@PathVariable(value = "id")int id){
+        UserEntity users = userService.findById(id);
+        return new ResponseEntity<UserEntity>(users, HttpStatus.OK);
+    }
+/*
+    @RequestMapping(value = "/user/{login}", method = RequestMethod.GET)
+    public ResponseEntity<UserEntity> findUserByLogin(@PathVariable(value = "login")String login){
+        UserEntity users = userService.findByLogin(login);
         return new ResponseEntity<UserEntity>(users, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/users_login", method = RequestMethod.GET)
-    public ResponseEntity<UserEntity> findUserByLogin(){
-        //ModelAndView modelAndView = new ModelAndView("index");
-        //modelAndView.addObject("users",userService.findAll());
-        UserEntity users = userService.findByLogin("user");
+    @RequestMapping(value = "/user/{email}", method = RequestMethod.GET)
+    public ResponseEntity<UserEntity> findUserByEmail(@PathVariable(value = "email")String email){
+        UserEntity users = userService.findByEmail(email);
         return new ResponseEntity<UserEntity>(users, HttpStatus.OK);
     }
-
-    @RequestMapping(value = "/users_email", method = RequestMethod.GET)
-    public ResponseEntity<UserEntity> findUserByEmail(){
-        //ModelAndView modelAndView = new ModelAndView("index");
-        //modelAndView.addObject("users",userService.findAll());
-        UserEntity users = userService.findByEmail("user@gmail.com");
-        return new ResponseEntity<UserEntity>(users, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/users_create", method = RequestMethod.GET)
-    public ResponseEntity<UserEntity> createUser(){
-        //ModelAndView modelAndView = new ModelAndView("index");
-        //modelAndView.addObject("users",userService.findAll());
-        UserEntity userEntity = new UserEntity();
-        userEntity.setLogin("new_user");
-        userEntity.setEmail("new_email@gmail.com");
-        userEntity.setRole("user");
-        userEntity.setAbout("");
-        userEntity.setPasswordHash("sdfsgdsher7834f");
+*/
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity userEntity){
         UserEntity users = userService.createUser(userEntity);
         return new ResponseEntity<UserEntity>(users, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/delete_user/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteUser(@PathVariable(value = "id") int id){
+        userService.deleteUser(id);
+        return new ResponseEntity( HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ResponseEntity<UserEntity> updateUser(@RequestBody UserEntity userEntity){
+        userService.updateUser(userEntity);
+        UserEntity updatedUser = userService.findByLogin(userEntity.getLogin());
+        return new ResponseEntity<UserEntity>(updatedUser, HttpStatus.OK);
     }
 
     private UserService userService;
