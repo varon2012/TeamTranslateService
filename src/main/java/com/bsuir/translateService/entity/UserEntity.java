@@ -1,15 +1,13 @@
 package com.bsuir.translateService.entity;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by Олег Пятко on 08.05.2017.
+ * Created by Олег Пятко on 09.05.2017.
  */
 @Entity
-@Table(name = "user", schema = "git_translate", catalog = "")
+@Table(name = "user", schema = "git_translate")
 public class UserEntity {
     private int idUser;
     private String login;

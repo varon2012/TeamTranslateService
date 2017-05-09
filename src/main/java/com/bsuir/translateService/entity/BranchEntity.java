@@ -3,14 +3,14 @@ package com.bsuir.translateService.entity;
 import javax.persistence.*;
 
 /**
- * Created by Олег Пятко on 08.05.2017.
+ * Created by Олег Пятко on 09.05.2017.
  */
 @Entity
-@Table(name = "branch", schema = "git_translate", catalog = "")
+@Table(name = "branch", schema = "git_translate")
 public class BranchEntity {
     private int idBranch;
     private String name;
-    private EmployeeEntity employeeByIdEmployee;
+    private int idEmployee;
 
     @Id
     @Column(name = "idBranch", nullable = false)
@@ -32,6 +32,16 @@ public class BranchEntity {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "idEmployee", nullable = false)
+    public int getIdEmployee() {
+        return idEmployee;
+    }
+
+    public void setIdEmployee(int idEmployee) {
+        this.idEmployee = idEmployee;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,6 +50,7 @@ public class BranchEntity {
         BranchEntity that = (BranchEntity) o;
 
         if (idBranch != that.idBranch) return false;
+        if (idEmployee != that.idEmployee) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
@@ -49,16 +60,7 @@ public class BranchEntity {
     public int hashCode() {
         int result = idBranch;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + idEmployee;
         return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "idEmployee", referencedColumnName = "idEmployee", nullable = false)
-    public EmployeeEntity getEmployeeByIdEmployee() {
-        return employeeByIdEmployee;
-    }
-
-    public void setEmployeeByIdEmployee(EmployeeEntity employeeByIdEmployee) {
-        this.employeeByIdEmployee = employeeByIdEmployee;
     }
 }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by Олег Пятко on 08.05.2017.
+ * Created by Олег Пятко on 09.05.2017.
  */
 @Entity
 @Table(name = "commit", schema = "git_translate", catalog = "")
@@ -12,7 +12,10 @@ public class CommitEntity {
     private int idCommit;
     private String plainText;
     private String translatedText;
+    private String commitText;
     private Timestamp createTime;
+    private int idBranch;
+    private String commitMessage;
 
     @Id
     @Column(name = "idCommit", nullable = false)
@@ -35,16 +38,6 @@ public class CommitEntity {
     }
 
     @Basic
-    @Column(name = "translatedText", nullable = true, length = -1)
-    public String getTranslatedText() {
-        return translatedText;
-    }
-
-    public void setTranslatedText(String translatedText) {
-        this.translatedText = translatedText;
-    }
-
-    @Basic
     @Column(name = "createTime", nullable = true)
     public Timestamp getCreateTime() {
         return createTime;
@@ -52,6 +45,26 @@ public class CommitEntity {
 
     public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
+    }
+
+    @Basic
+    @Column(name = "commitMessage", nullable = false, length = 200)
+    public String getCommitMessage() {
+        return commitMessage;
+    }
+
+    public void setCommitMessage(String commitMessage) {
+        this.commitMessage = commitMessage;
+    }
+
+    @Basic
+    @Column(name = "idBranch", nullable = false)
+    public int getIdBranch() {
+        return idBranch;
+    }
+
+    public void setIdBranch(int idBranch) {
+        this.idBranch = idBranch;
     }
 
     @Override
@@ -62,6 +75,7 @@ public class CommitEntity {
         CommitEntity that = (CommitEntity) o;
 
         if (idCommit != that.idCommit) return false;
+        if (idBranch != that.idBranch) return false;
         if (plainText != null ? !plainText.equals(that.plainText) : that.plainText != null) return false;
         if (translatedText != null ? !translatedText.equals(that.translatedText) : that.translatedText != null)
             return false;
@@ -76,6 +90,7 @@ public class CommitEntity {
         result = 31 * result + (plainText != null ? plainText.hashCode() : 0);
         result = 31 * result + (translatedText != null ? translatedText.hashCode() : 0);
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
+        result = 31 * result + idBranch;
         return result;
     }
 }

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class LoginController {
 
+    /*
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity<Iterable<UserEntity>> findAllUsers(){
         Iterable<UserEntity> users = userService.findAll();
@@ -29,7 +30,7 @@ public class LoginController {
         UserEntity users = userService.findById(id);
         return new ResponseEntity<UserEntity>(users, HttpStatus.OK);
     }
-    /*
+
         @RequestMapping(value = "/user/{login}", method = RequestMethod.GET)
         public ResponseEntity<UserEntity> findUserByLogin(@PathVariable(value = "login")String login){
             UserEntity users = userService.findByLogin(login);
@@ -41,7 +42,7 @@ public class LoginController {
             UserEntity users = userService.findByEmail(email);
             return new ResponseEntity<UserEntity>(users, HttpStatus.OK);
         }
-    */
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity userEntity){
         UserEntity users = userService.createUser(userEntity);
@@ -66,5 +67,5 @@ public class LoginController {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
+    }*/
 }
