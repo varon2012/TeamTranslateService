@@ -1,5 +1,6 @@
 package com.bsuir.translateService.dao.impl;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,5 +17,9 @@ public class BaseRepository {
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    protected Session GetCurrentSession(){
+        return sessionFactory.getCurrentSession();
     }
 }
