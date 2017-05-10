@@ -13,7 +13,7 @@ public interface EmployeeRepository {
     Iterable<EmployeeEntity> findByUserId(int id);
     EmployeeEntity findById(int id);
     Iterable<EmployeeEntity> findByRepositoryid(int id);
-    void createUser(EmployeeEntity employeeEntity);
-    void updateUser(EmployeeEntity employeeEntity);
-    void deleteUser(EmployeeEntity employeeEntity);
+    void createEmployee(EmployeeEntity employeeEntity);
+    void updateEmployee(EmployeeEntity employeeEntity);
+    void deleteEmployee(EmployeeEntity employeeEntity);
 }

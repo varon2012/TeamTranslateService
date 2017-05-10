@@ -6,11 +6,12 @@ import javax.persistence.*;
  * Created by Олег Пятко on 09.05.2017.
  */
 @Entity
-@Table(name = "branch", schema = "git_translate")
+@Table(name = "branch", schema = "git_translate", catalog = "")
 public class BranchEntity {
     private int idBranch;
     private String name;
     private int idEmployee;
+    private String plainText;
 
     @Id
     @Column(name = "idBranch", nullable = false)
@@ -23,7 +24,7 @@ public class BranchEntity {
     }
 
     @Basic
-    @Column(name = "name", nullable = true, length = 45)
+    @Column(name = "name", nullable = false, length = 45)
     public String getName() {
         return name;
     }
@@ -62,5 +63,15 @@ public class BranchEntity {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + idEmployee;
         return result;
+    }
+
+    @Basic
+    @Column(name = "plainText", nullable = false, length = -1)
+    public String getPlainText() {
+        return plainText;
+    }
+
+    public void setPlainText(String plainText) {
+        this.plainText = plainText;
     }
 }

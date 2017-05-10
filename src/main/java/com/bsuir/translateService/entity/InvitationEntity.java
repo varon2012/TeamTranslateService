@@ -6,14 +6,13 @@ import javax.persistence.*;
  * Created by Олег Пятко on 09.05.2017.
  */
 @Entity
-@Table(name = "invitation", schema = "git_translate")
+@Table(name = "invitation", schema = "git_translate", catalog = "")
 public class InvitationEntity {
     private int idInvitation;
     private int idInvitedUser;
     private int idInviter;
     private int idRepository;
     private String invitationText;
-    private String invitationcol;
 
     @Id
     @Column(name = "idInvitation", nullable = false)
@@ -65,16 +64,6 @@ public class InvitationEntity {
         this.invitationText = invitationText;
     }
 
-    @Basic
-    @Column(name = "Invitationcol", nullable = true, length = 45)
-    public String getInvitationcol() {
-        return invitationcol;
-    }
-
-    public void setInvitationcol(String invitationcol) {
-        this.invitationcol = invitationcol;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,8 +77,6 @@ public class InvitationEntity {
         if (idRepository != that.idRepository) return false;
         if (invitationText != null ? !invitationText.equals(that.invitationText) : that.invitationText != null)
             return false;
-        if (invitationcol != null ? !invitationcol.equals(that.invitationcol) : that.invitationcol != null)
-            return false;
 
         return true;
     }
@@ -101,7 +88,6 @@ public class InvitationEntity {
         result = 31 * result + idInviter;
         result = 31 * result + idRepository;
         result = 31 * result + (invitationText != null ? invitationText.hashCode() : 0);
-        result = 31 * result + (invitationcol != null ? invitationcol.hashCode() : 0);
         return result;
     }
 }

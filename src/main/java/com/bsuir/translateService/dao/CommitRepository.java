@@ -13,7 +13,9 @@ public interface CommitRepository {
     Iterable<CommitEntity> findAll();
     CommitEntity findById(int id);
     Iterable<CommitEntity> findByBranchId(int id);
-    void createBranch(CommitEntity commitEntity);
-    void updateBranch(CommitEntity commitEntity);
-    void deleteBranch(CommitEntity commitEntity);
+    CommitEntity findLastCommitInBranch(int branchId);
+    public CommitEntity findFirstCommitInBranch(int branchId);
+    void createCommit(CommitEntity commitEntity);
+    void updateCommit(CommitEntity commitEntity);
+    void deleteCommit(CommitEntity commitEntity);
 }

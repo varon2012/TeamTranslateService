@@ -63,21 +63,21 @@ public class InvitationRepositoryImpl extends BaseRepository implements Invitati
     }
 
     @Override
-    public void createRepository(InvitationEntity invitationEntity) {
+    public void createInvitation(InvitationEntity invitationEntity) {
         Session session = GetCurrentSession();
 
         session.save(invitationEntity);
     }
 
     @Override
-    public void updateRepository(InvitationEntity invitationEntity) {
+    public void updateInvitation(InvitationEntity invitationEntity) {
         Session session = GetCurrentSession();
 
         session.update(invitationEntity);
     }
 
     @Override
-    public void deleteRepository(InvitationEntity invitationEntity) {
+    public void deleteInvitation(InvitationEntity invitationEntity) {
         Session session = GetCurrentSession();
 
         session.delete(invitationEntity);

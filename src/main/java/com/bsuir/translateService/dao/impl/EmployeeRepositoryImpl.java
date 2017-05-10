@@ -54,21 +54,21 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
     }
 
     @Override
-    public void createUser(EmployeeEntity employeeEntity) {
+    public void createEmployee(EmployeeEntity employeeEntity) {
         Session session = GetCurrentSession();
 
         session.save(employeeEntity);
     }
 
     @Override
-    public void updateUser(EmployeeEntity employeeEntity) {
+    public void updateEmployee(EmployeeEntity employeeEntity) {
         Session session = GetCurrentSession();
 
         session.update(employeeEntity);
     }
 
     @Override
-    public void deleteUser(EmployeeEntity employeeEntity) {
+    public void deleteEmployee(EmployeeEntity employeeEntity) {
         Session session = GetCurrentSession();
 
         session.delete(employeeEntity);

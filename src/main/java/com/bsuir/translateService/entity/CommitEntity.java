@@ -10,12 +10,13 @@ import java.sql.Timestamp;
 @Table(name = "commit", schema = "git_translate", catalog = "")
 public class CommitEntity {
     private int idCommit;
-    private String plainText;
     private String translatedText;
     private String commitText;
     private Timestamp createTime;
     private int idBranch;
     private String commitMessage;
+    private Integer nextCommitId;
+    private Integer previousCommitId;
 
     @Id
     @Column(name = "idCommit", nullable = false)
@@ -25,16 +26,6 @@ public class CommitEntity {
 
     public void setIdCommit(int idCommit) {
         this.idCommit = idCommit;
-    }
-
-    @Basic
-    @Column(name = "plainText", nullable = true, length = -1)
-    public String getPlainText() {
-        return plainText;
-    }
-
-    public void setPlainText(String plainText) {
-        this.plainText = plainText;
     }
 
     @Basic
@@ -76,7 +67,6 @@ public class CommitEntity {
 
         if (idCommit != that.idCommit) return false;
         if (idBranch != that.idBranch) return false;
-        if (plainText != null ? !plainText.equals(that.plainText) : that.plainText != null) return false;
         if (translatedText != null ? !translatedText.equals(that.translatedText) : that.translatedText != null)
             return false;
         if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
@@ -87,10 +77,29 @@ public class CommitEntity {
     @Override
     public int hashCode() {
         int result = idCommit;
-        result = 31 * result + (plainText != null ? plainText.hashCode() : 0);
         result = 31 * result + (translatedText != null ? translatedText.hashCode() : 0);
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
         result = 31 * result + idBranch;
         return result;
+    }
+
+    @Basic
+    @Column(name = "nextCommitId", nullable = true)
+    public Integer getNextCommitId() {
+        return nextCommitId;
+    }
+
+    public void setNextCommitId(Integer nextCommitId) {
+        this.nextCommitId = nextCommitId;
+    }
+
+    @Basic
+    @Column(name = "previousCommitId", nullable = true)
+    public Integer getPreviousCommitId() {
+        return previousCommitId;
+    }
+
+    public void setPreviousCommitId(Integer previousCommitId) {
+        this.previousCommitId = previousCommitId;
     }
 }

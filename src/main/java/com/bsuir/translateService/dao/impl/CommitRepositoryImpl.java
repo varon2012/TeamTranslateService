@@ -45,21 +45,48 @@ public class CommitRepositoryImpl extends BaseRepository implements CommitReposi
     }
 
     @Override
-    public void createBranch(CommitEntity commitEntity) {
+    public CommitEntity findLastCommitInBranch(int branchId) {
+        Session session = GetCurrentSession();
+        Query query = session.createQuery("from CommitEntity c where c.idBranch = :branchId and c.nextCommitId = null");
+        query.setParameter("branchId", branchId);
+        List<CommitEntity> list = query.list();
+
+        if (list.size() == 0){
+            return null;
+        }
+
+        return list.get(0);
+    }
+
+    public CommitEntity findFirstCommitInBranch(int branchId){
+        Session session = GetCurrentSession();
+        Query query = session.createQuery("from CommitEntity c where c.idBranch = :branchId and c.previousCommitId = null");
+        query.setParameter("branchId", branchId);
+        List<CommitEntity> list = query.list();
+
+        if (list.size() == 0){
+            return null;
+        }
+
+        return list.get(0);
+    }
+
+    @Override
+    public void createCommit(CommitEntity commitEntity) {
         Session session = GetCurrentSession();
 
         session.save(commitEntity);
     }
 
     @Override
-    public void updateBranch(CommitEntity commitEntity) {
+    public void updateCommit(CommitEntity commitEntity) {
         Session session = GetCurrentSession();
 
         session.update(commitEntity);
     }
 
     @Override
-    public void deleteBranch(CommitEntity commitEntity) {
+    public void deleteCommit(CommitEntity commitEntity) {
         Session session = GetCurrentSession();
 
         session.delete(commitEntity);
