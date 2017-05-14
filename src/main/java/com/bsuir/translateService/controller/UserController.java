@@ -2,15 +2,11 @@ package com.bsuir.translateService.controller;
 
 import com.bsuir.translateService.entity.UserEntity;
 import com.bsuir.translateService.service.UserService;
-import com.bsuir.translateService.service.exception.ServiceException;
-import org.omg.PortableInterceptor.USER_EXCEPTION;
+import com.bsuir.translateService.utils.DiffAlgorithmString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by Олег Пятко on 07.05.2017.
@@ -21,6 +17,8 @@ public class UserController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity<Iterable<UserEntity>> findAllUsers(){
         Iterable<UserEntity> users = userService.findAll();
+        DiffAlgorithmString lcsString = new DiffAlgorithmString("big brown dog", "small brown cat");
+        String diff = lcsString.getHtmlDiff();
         return new ResponseEntity<Iterable<UserEntity>>(users, HttpStatus.OK);
     }
 

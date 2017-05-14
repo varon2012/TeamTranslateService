@@ -98,6 +98,8 @@ public class UserService{
         if (HelpUtils.isNullOrEmpty(userEntity.getPasswordHash())){
             throw new ServiceException("wrong password");
         }
+
+
     }
 
     UserRepository userRepository;

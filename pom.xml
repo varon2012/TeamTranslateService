@@ -133,5 +133,11 @@
             <version>${servlet-api.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
     </dependencies>
 </project>
