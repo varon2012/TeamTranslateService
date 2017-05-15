@@ -15,7 +15,6 @@
         <mapping class="com.bsuir.translateService.entity.InvitationEntity"/>
         <mapping class="com.bsuir.translateService.entity.RepositoryEntity"/>
         <mapping class="com.bsuir.translateService.entity.UserEntity"/>
-
     </session-factory>
 
 </hibernate-configuration>

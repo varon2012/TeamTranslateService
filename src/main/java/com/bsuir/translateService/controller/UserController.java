@@ -1,6 +1,8 @@
 package com.bsuir.translateService.controller;
 
+import com.bsuir.translateService.entity.RoleEnum;
 import com.bsuir.translateService.entity.UserEntity;
+import com.bsuir.translateService.security.Secured;
 import com.bsuir.translateService.service.UserService;
 import com.bsuir.translateService.utils.DiffAlgorithmString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by Олег Пятко on 07.05.2017.
  */
+@CrossOrigin
 @RestController
 public class UserController {
 
@@ -40,8 +43,14 @@ public class UserController {
         return new ResponseEntity<UserEntity>(users, HttpStatus.OK);
     }
 */
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity userEntity){
+    @Secured(RoleEnum.ADMIN)
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public ResponseEntity<UserEntity> createUser(){
+        UserEntity userEntity = new UserEntity();
+        userEntity.setLogin("user_enum");
+        userEntity.setEmail("enum@gmail.com");
+        userEntity.setRole(RoleEnum.USER);
+        userEntity.setPasswordHash("fsd43gb3f3");
         UserEntity users = userService.createUser(userEntity);
         return new ResponseEntity<UserEntity>(users, HttpStatus.OK);
     }

@@ -1,5 +1,6 @@
 package com.bsuir.translateService.entity;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -15,7 +16,7 @@ public class UserEntity {
     private String passwordHash;
     private Timestamp createTime;
     private String about;
-    private String role;
+    private RoleEnum role;
 
     @Id
     @Column(name = "idUser", nullable = false)
@@ -78,12 +79,13 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "role", nullable = true)
-    public String getRole() {
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    public RoleEnum getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleEnum role) {
         this.role = role;
     }
 

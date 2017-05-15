@@ -23,9 +23,9 @@ import java.lang.reflect.Method;
 @Component
 public class SecureBeforeMethod {
 
-    @Around("@annotation(com.bsuir.translateService)")
+    @Around("@annotation(com.bsuir.translateService.security.Secured)")
     public ResponseEntity doSecure(ProceedingJoinPoint joinPoint) throws Throwable {
-        SignatureAttribute.MethodSignature signature = (MethodSignature)joinPoint.getSignature();
+        MethodSignature signature = (MethodSignature)joinPoint.getSignature();
         Method method = signature.getMethod();
         RoleEnum[] validRoles = method.getAnnotation(Secured.class).value();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
