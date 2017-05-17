@@ -1,6 +1,7 @@
 package com.bsuir.translateService.controller;
 
 import com.bsuir.translateService.entity.LoginEntity;
+import com.bsuir.translateService.entity.RoleEnum;
 import com.bsuir.translateService.entity.UserEntity;
 import com.bsuir.translateService.security.GetTokenService;
 import com.bsuir.translateService.service.UserService;
@@ -34,8 +35,25 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/reg", method = RequestMethod.GET)
+    public ModelAndView reg(){
+        LoginEntity loginEntity = new LoginEntity();
+        ModelAndView modelAndView = new ModelAndView("register");
+        modelAndView.addObject("login", loginEntity);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ModelAndView register()
+    public ModelAndView register(HttpServletRequest request, LoginEntity loginEntity){
+        UserEntity userEntity = new UserEntity();
+        userEntity.setLogin(loginEntity.getUsername());
+        userEntity.setPasswordHash(loginEntity.getPassword());
+        userEntity.setRole(RoleEnum.USER);
+        userEntity.setEmail(loginEntity.getEmail());
+        userService.createUser(userEntity);
+        ModelAndView modelAndView = new ModelAndView("redirect:/login");
+        return modelAndView;
+    }
 
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public ModelAndView goToMainPage(HttpServletRequest request, LoginEntity loginEntity) throws Exception {

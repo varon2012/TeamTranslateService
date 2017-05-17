@@ -30,7 +30,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
         if (!request.getRequestURI().equals("/login") &&
                 !request.getRequestURI().equals("/register")&&
-                !request.getRequestURI().equals("/auth")){
+                !request.getRequestURI().equals("/auth")&&
+                !request.getRequestURI().equals("/reg")){
             Claims claims;
 
             if(token != null) {

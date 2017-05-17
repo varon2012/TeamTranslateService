@@ -47,7 +47,7 @@
                     <form:input type="text" placeholder="username" path="username"/>
                     <form:input type="password" placeholder="password" path="password"/>
                     <button type="submit">login</button>
-                    <p class="message">Not registered? <a href="./register.html">Create an account</a></p>
+                    <p class="message">Not registered? <a href="<c:url value="/reg"/>">Create an account</a></p>
                 </form:form>
             </div>
         </div>
