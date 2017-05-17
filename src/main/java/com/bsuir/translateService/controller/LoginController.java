@@ -1,6 +1,8 @@
 package com.bsuir.translateService.controller;
 
+import com.bsuir.translateService.entity.LoginEntity;
 import com.bsuir.translateService.entity.UserEntity;
+import com.bsuir.translateService.security.GetTokenService;
 import com.bsuir.translateService.service.UserService;
 import com.bsuir.translateService.service.exception.ServiceException;
 import org.omg.PortableInterceptor.USER_EXCEPTION;
@@ -9,15 +11,62 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import sun.rmi.runtime.Log;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Олег Пятко on 07.05.2017.
  */
+
+@CrossOrigin
 @RestController
 public class LoginController {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView showLoginPage() {
+        ModelAndView modelAndView = new ModelAndView("login");
+        LoginEntity loginEntity = new LoginEntity();
+        modelAndView.addObject("loginEntity", loginEntity);
+        return modelAndView;
+    }
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ModelAndView register()
+
+    @RequestMapping(value = "/auth", method = RequestMethod.POST)
+    public ModelAndView goToMainPage(HttpServletRequest request, LoginEntity loginEntity) throws Exception {
+       /* if(bindingResult.hasErrors()){
+            ModelAndView modelAndView = new ModelAndView("login");
+            return modelAndView;
+        }*/
+        String login = loginEntity.getUsername();
+        String password = loginEntity.getPassword();
+        UserEntity userEntity = userService.findByLogin(login);
+        if (userEntity != null){
+            String token = getTokenService.getToken(login, password);
+            if (token != null){
+                request.getSession().setAttribute("token", token);
+            }
+            else {
+                return new ModelAndView("login");
+            }
+        }
+        return new ModelAndView("redirect:/users");
+    }
+
+    @Autowired
+    private GetTokenService getTokenService;
+
+    private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
     /*
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity<Iterable<UserEntity>> findAllUsers(){

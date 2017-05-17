@@ -37,6 +37,7 @@
     </style>
 </head>
 <body>
+    Login works as well
     <table>
         <tr>
             <th>Login</th>

@@ -1,52 +1,77 @@
 package com.bsuir.translateService.interceptor;
 
+import com.bsuir.translateService.entity.RoleEnum;
 import com.bsuir.translateService.entity.UserEntity;
+import com.bsuir.translateService.security.GetTokenService;
 import com.bsuir.translateService.service.UserService;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.security.SignatureException;
+
 
 /**
  * Created by Олег Пятко on 16.05.2017.
  */
-@CrossOrigin
-@Scope("AuthInterceptor")
 public class AuthInterceptor extends HandlerInterceptorAdapter {
-
     @Autowired
     private UserService userService;
-    @Value("${jwt.secret}")
-    private String SECRET;
+    @Autowired
+    private GetTokenService getTokenService;
+
+    private  int ADMIN = 0;
+    private  int USER = 1;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        if (request.getMethod().equals("OPTIONS")) return true;
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String token = (String) request.getSession().getAttribute("token");
 
-        String authHeader = request.getHeader("Authorization");
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            response.sendError(401);
-            return false;
+        if (!request.getRequestURI().equals("/login") &&
+                !request.getRequestURI().equals("/register")&&
+                !request.getRequestURI().equals("/auth")){
+            Claims claims;
+
+            if(token != null) {
+                try {
+                    String login = getTokenService.getLoginFromToken(token);
+
+                    UserEntity userEntity =  userService.findByLogin(login);
+                    if((userEntity == null))
+                    {
+                        response.sendRedirect("/login");
+                        return false;
+                    }
+                    String tokenToCompare = getTokenService.getToken(userEntity.getLogin(), userEntity.getPasswordHash());
+                    if(tokenToCompare.equals(token))
+                    {
+                        int role = userEntity.getRole().getValue();
+                        if((role == 0)  || (role == 1)){
+                            return true;
+                        }
+                        else{
+                            response.sendRedirect("/login");
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        response.sendRedirect("/login");
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Token corrupted");
+                }
+            }
+            else
+            {
+                response.sendRedirect("/login");
+                return false;
+            }
         }
-        String token = authHeader.substring(7); // The part after "Bearer "
-
-        Claims claims = null;
-        claims = Jwts.parser().setSigningKey(SECRET)
-                .parseClaimsJws(token).getBody();
-        int userId = Integer.parseInt(claims.getSubject());
-        UserEntity user = userService.findById(userId);
-        if(user == null) {
-            return false;
-        }
-        request.setAttribute("user", user);
-
-        return claims != null;
+        return true;
     }
 }

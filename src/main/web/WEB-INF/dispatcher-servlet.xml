@@ -6,7 +6,7 @@
 
 
 
-    <mvc:resources mapping="/resources/**" location="/" />
+    <mvc:resources mapping="/resources/**" location="/resources/" />
     <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:6060/git_translate?serverTimezone=UTC"/>
@@ -28,7 +28,14 @@
     </bean>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/" />
+        <property name="prefix" value="/views/" />
         <property name="suffix" value=".jsp" />
     </bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*"/>
+            <bean class="com.bsuir.translateService.interceptor.AuthInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
