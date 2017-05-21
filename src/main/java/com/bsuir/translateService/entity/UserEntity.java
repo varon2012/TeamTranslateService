@@ -1,14 +1,13 @@
 package com.bsuir.translateService.entity;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by Олег Пятко on 09.05.2017.
+ * Created by Олег Пятко on 21.05.2017.
  */
 @Entity
-@Table(name = "user", schema = "git_translate")
+@Table(name = "user", schema = "git_translate", catalog = "")
 public class UserEntity {
     private int idUser;
     private String login;
@@ -59,7 +58,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "createTime", nullable = true)
+    @Column(name = "createTime", nullable = false)
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -79,8 +78,8 @@ public class UserEntity {
     }
 
     @Basic
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "role", nullable = false)
-    @Enumerated(EnumType.STRING)
     public RoleEnum getRole() {
         return role;
     }

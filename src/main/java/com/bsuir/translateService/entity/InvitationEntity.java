@@ -3,7 +3,7 @@ package com.bsuir.translateService.entity;
 import javax.persistence.*;
 
 /**
- * Created by Олег Пятко on 09.05.2017.
+ * Created by Олег Пятко on 21.05.2017.
  */
 @Entity
 @Table(name = "invitation", schema = "git_translate", catalog = "")
@@ -69,13 +69,13 @@ public class InvitationEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        InvitationEntity that = (InvitationEntity) o;
+        InvitationEntity entity = (InvitationEntity) o;
 
-        if (idInvitation != that.idInvitation) return false;
-        if (idInvitedUser != that.idInvitedUser) return false;
-        if (idInviter != that.idInviter) return false;
-        if (idRepository != that.idRepository) return false;
-        if (invitationText != null ? !invitationText.equals(that.invitationText) : that.invitationText != null)
+        if (idInvitation != entity.idInvitation) return false;
+        if (idInvitedUser != entity.idInvitedUser) return false;
+        if (idInviter != entity.idInviter) return false;
+        if (idRepository != entity.idRepository) return false;
+        if (invitationText != null ? !invitationText.equals(entity.invitationText) : entity.invitationText != null)
             return false;
 
         return true;

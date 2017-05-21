@@ -1,6 +1,5 @@
 package com.bsuir.translateService.interceptor;
 
-import com.bsuir.translateService.entity.RoleEnum;
 import com.bsuir.translateService.entity.UserEntity;
 import com.bsuir.translateService.security.GetTokenService;
 import com.bsuir.translateService.service.UserService;

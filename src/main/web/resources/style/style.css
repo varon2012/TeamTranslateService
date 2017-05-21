@@ -1,11 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 html, body, .page{
-    height: 100%;
+    min-height: 100vh;
 }
 
 body{
-    overflow: hidden;
     margin: 0;
 }
 
@@ -46,7 +45,7 @@ body{
     text-align: center;
     vertical-align: center;
     color: #283739;
-    padding: 17px 25px 17px 16px;
+    padding: 17px 25px 17px 25px;
     text-decoration: none;
     font-size: 15px;
 }
@@ -73,8 +72,15 @@ body{
 .page-content{
     flex: 1 1 auto;
     position: relative;
-    overflow-y: scroll;
     background-color: #DDDDDD;
+}
+
+.page-content._commit-page {
+    display: flex;
+}
+
+.page-content._commit-page .commit-text-container {
+    align-self: stretch;
 }
 
 /*LOGIN
@@ -157,7 +163,9 @@ REGISTRATION*/
 
 .commit-text-container{
     width: 60%;
-    overflow: auto;
+    margin: 10px auto;
+    background: #fff;
+    padding: 10px 20px;
 }
 
 .comparer-container{
@@ -166,6 +174,101 @@ REGISTRATION*/
     flex-wrap: nowrap;
 }
 
-.plain-text-container{
-    flex: 0 0 auto;
+.plain-text-container {
+    flex-grow: 1;
+    margin: 10px;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+}
+
+.plain-text-container h1 {
+    padding: 0;
+    margin: 0 0 0;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.plain-text-container p {
+    background: #fff;
+    flex-grow: 1;
+    padding: 10px 20px;
+    margin: 0;
+}
+
+.table-header{
+    padding: 0 0 0 20px;
+}
+
+.table-default {
+    display: table;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    box-sizing: border-box;
+    padding:  0 20px;
+}
+
+.table-default__row {
+    display: table-row;
+    width: 100%;
+    background: #fff;
+    cursor: pointer;
+}
+
+.table-default__row:hover {
+    background: #f1f1f1;
+}
+
+.table-default__row._head {
+    background: #f1f1f1;
+    color: #777;
+}
+
+.table-default__col {
+    border-bottom: 1px solid #ccc;
+    display: table-cell;
+    padding: 5px 10px;
+}
+
+.table-default__row:last-child .table-default__col {
+    border-bottom: 0;
+}
+
+.select-container{
+    margin: 20px;
+}
+
+.select-container select{
+    height: 30px;
+    min-width: 100px;
+}
+
+.none{
+
+}
+
+.remove{
+    background-color: #eb5b5b;
+}
+
+.add{
+    background-color: #64e344;
+}
+
+.compare_button{
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    border: 0;
+    padding: 10px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
 }

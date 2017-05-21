@@ -1,7 +1,6 @@
 package com.bsuir.translateService.dao;
 
 import com.bsuir.translateService.entity.BranchEntity;
-import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -13,7 +12,10 @@ public interface BranchRepository {
     Iterable<BranchEntity> findAll();
     BranchEntity findByName(String name);
     BranchEntity findById(int id);
-    Iterable<BranchEntity> findByEmployeeId(int id);
+    Iterable<BranchEntity> findByIdRepository(int id);
+    Iterable<BranchEntity> findByIdUser(int id);
+    Iterable<BranchEntity> findByIdAndMainUser(int id);
+   // Iterable<BranchEntity> findByEmployeeId(int id);
     void createBranch(BranchEntity BranchEntity);
     void updateBranch(BranchEntity BranchEntity);
     void deleteBranch(BranchEntity BranchEntity);

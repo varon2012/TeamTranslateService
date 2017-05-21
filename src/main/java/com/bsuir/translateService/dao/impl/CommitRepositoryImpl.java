@@ -72,9 +72,23 @@ public class CommitRepositoryImpl extends BaseRepository implements CommitReposi
     }
 
     @Override
+    public CommitEntity findByHash(String hash) {
+        Session session = GetCurrentSession();
+        Query query = session.createQuery("from CommitEntity c where c.hash = :hash");
+        query.setParameter("hash", hash);
+        List<CommitEntity> list = query.list();
+
+        if (list.size() == 0){
+            return null;
+        }
+
+        return list.get(0);
+    }
+
+    @Override
     public void createCommit(CommitEntity commitEntity) {
         Session session = GetCurrentSession();
-
+        commitEntity.setHash(Long.toString(System.nanoTime()).substring(8));
         session.save(commitEntity);
     }
 

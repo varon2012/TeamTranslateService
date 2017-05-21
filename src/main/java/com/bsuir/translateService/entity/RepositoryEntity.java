@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by Олег Пятко on 09.05.2017.
+ * Created by Олег Пятко on 21.05.2017.
  */
 @Entity
-@Table(name = "repository", schema = "git_translate")
+@Table(name = "repository", schema = "git_translate", catalog = "")
 public class RepositoryEntity {
     private int idRepository;
     private String name;

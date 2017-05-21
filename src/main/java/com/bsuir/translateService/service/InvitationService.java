@@ -6,8 +6,6 @@ import com.bsuir.translateService.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * Created by Олег Пятко on 10.05.2017.
  */

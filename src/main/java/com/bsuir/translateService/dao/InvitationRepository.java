@@ -1,7 +1,6 @@
 package com.bsuir.translateService.dao;
 
 import com.bsuir.translateService.entity.InvitationEntity;
-import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

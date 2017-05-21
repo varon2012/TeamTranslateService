@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Created by Олег Пятко on 09.05.2017.
  */
-@Repository
-@Transactional
+//@Repository
+//@Transactional
 public interface EmployeeRepository {
     Iterable<EmployeeEntity> findAll();
     Iterable<EmployeeEntity> findByUserId(int id);

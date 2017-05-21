@@ -2,7 +2,6 @@ package com.bsuir.translateService.controller;
 
 import com.bsuir.translateService.entity.RoleEnum;
 import com.bsuir.translateService.entity.UserEntity;
-import com.bsuir.translateService.security.Secured;
 import com.bsuir.translateService.service.UserService;
 import com.bsuir.translateService.utils.DiffAlgorithmString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @CrossOrigin
 @RestController
-public class UserController {
+public class UserController extends BaseController{
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity<Iterable<UserEntity>> findAllUsers(){
@@ -43,7 +42,6 @@ public class UserController {
         return new ResponseEntity<UserEntity>(users, HttpStatus.OK);
     }
 */
-    @Secured(RoleEnum.ADMIN)
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ResponseEntity<UserEntity> createUser(){
         UserEntity userEntity = new UserEntity();

@@ -13,7 +13,7 @@
 <head>
     <title>Login</title>
     <meta charset="UTF-8">
-    <link rel='stylesheet' href="<c:url value="/resources/style/style.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/style/style.css"/>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 

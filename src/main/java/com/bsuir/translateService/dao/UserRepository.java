@@ -1,7 +1,6 @@
 package com.bsuir.translateService.dao;
 
 import com.bsuir.translateService.entity.UserEntity;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

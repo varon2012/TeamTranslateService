@@ -1,22 +1,13 @@
 package com.bsuir.translateService.controller;
 
-import com.bsuir.translateService.entity.LoginEntity;
+import com.bsuir.translateService.dto.LoginEntity;
 import com.bsuir.translateService.entity.RoleEnum;
 import com.bsuir.translateService.entity.UserEntity;
 import com.bsuir.translateService.security.GetTokenService;
 import com.bsuir.translateService.service.UserService;
-import com.bsuir.translateService.service.exception.ServiceException;
-import org.omg.PortableInterceptor.USER_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import sun.rmi.runtime.Log;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @CrossOrigin
 @RestController
-public class LoginController {
+public class LoginController extends BaseController{
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView showLoginPage() {
         ModelAndView modelAndView = new ModelAndView("login");
@@ -73,7 +64,14 @@ public class LoginController {
                 return new ModelAndView("login");
             }
         }
-        return new ModelAndView("redirect:/users");
+        return new ModelAndView("redirect:/branch_list/");
+    }
+
+    @RequestMapping(value = "/logout")
+    public ModelAndView logout(HttpServletRequest request){
+        request.getSession().removeAttribute("token");
+        LoginEntity loginEntity = new LoginEntity();
+        return BuildModelAndView("login", "loginEntity", loginEntity);
     }
 
     @Autowired

@@ -3,8 +3,6 @@ package com.bsuir.translateService.dao.impl;
 import com.bsuir.translateService.dao.UserRepository;
 import com.bsuir.translateService.entity.UserEntity;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.query.Query;

@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * Created by Олег Пятко on 09.05.2017.
  */
-@Repository
-@Transactional
+//@Repository
+//@Transactional
 public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRepository {
     @Override
     public Iterable<EmployeeEntity> findAll() {

@@ -1,7 +1,7 @@
 package com.bsuir.translateService.entity;
 
 /**
- * Created by Олег Пятко on 14.05.2017.
+ * Created by Олег Пятко on 21.05.2017.
  */
 public enum RoleEnum {
     ADMIN(0),
@@ -16,5 +16,4 @@ public enum RoleEnum {
     public int getValue(){
         return levelId;
     }
-
 }

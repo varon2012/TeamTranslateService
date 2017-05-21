@@ -1,12 +1,15 @@
 package com.bsuir.translateService.service;
 
 import com.bsuir.translateService.dao.BranchRepository;
+import com.bsuir.translateService.dto.BranchDto;
 import com.bsuir.translateService.entity.BranchEntity;
+import com.bsuir.translateService.entity.CommitEntity;
 import com.bsuir.translateService.service.exception.ServiceException;
 import com.bsuir.translateService.utils.HelpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,9 +32,41 @@ public class BranchService {
         return branchEntity;
     }
 
-    public Iterable<BranchEntity> findByEmployeeId(int id){
-        return branchRepository.findByEmployeeId(id);
+    public Iterable<BranchEntity> findByRepositoryId(int id){
+        return branchRepository.findByIdRepository(id);
     }
+
+    public Iterable<BranchEntity> findByUserId(int id){
+        return branchRepository.findByIdUser(id);
+    }
+
+    public Iterable<BranchEntity> findByUserIdAndMainUser(int id){
+        return branchRepository.findByIdAndMainUser(id);
+    }
+
+    public Iterable<BranchDto> getAllUsersTasks(int userId){
+        Iterable<BranchEntity> branches = findByUserId(userId);
+        List<BranchDto> result = new ArrayList<BranchDto>();
+        for (BranchEntity branchEntity: branches) {
+            BranchDto dto = new BranchDto();
+            dto.setEntity(branchEntity);
+
+            List<CommitEntity> commits = (List<CommitEntity>) commitService.findByBranchId(branchEntity.getIdBranch());
+            dto.setCommitNumber(commits.size());
+
+            String lastCommitMessage = commitService.findLastCommitInBranch(branchEntity.getIdBranch()).getCommitMessage();
+            dto.setLastCommitMessage(lastCommitMessage);
+
+            String repoName = repositoryService.findById(branchEntity.getIdRepository()).getName();
+            dto.setRepositoryName(repoName);
+
+            result.add(dto);
+        }
+        return result;
+    }
+   // public Iterable<BranchEntity> findByEmployeeId(int id){
+   //     return branchRepository.findByEmployeeId(id);
+  //  }
 
     public BranchEntity findByName(String name){
         return branchRepository.findByName(name);
@@ -57,10 +92,39 @@ public class BranchService {
         }
     }
 
+    /*
+    public Iterable<BranchDto> findBranchesWithCommitInfoByEmployeeId(int employeeId){
+        //Iterable<BranchEntity> branches = branchRepository.findByEmployeeId(employeeId);
+        List<BranchDto> result = new ArrayList<BranchDto>();
+        for (BranchEntity branchEntity: branches) {
+            BranchDto dto = new BranchDto();
+            dto.setEntity(branchEntity);
+            List<CommitEntity> commits = (List<CommitEntity>) commitService.findByBranchId(branchEntity.getIdBranch());
+            dto.setCommitNumber(commits.size());
+            result.add(dto);
+        }
+        return result;
+    }
+*/
+    //private CommitEntity getLatestCommit
+
+    private CommitService commitService;
+    private RepositoryService repositoryService;
     private BranchRepository branchRepository;
+
 
     @Autowired
     public void setBranchRepository(BranchRepository branchRepository) {
         this.branchRepository = branchRepository;
+    }
+
+    @Autowired
+    public void setCommitService(CommitService commitService) {
+        this.commitService = commitService;
+    }
+
+    @Autowired
+    public void setRepositoryService(RepositoryService repositoryService) {
+        this.repositoryService = repositoryService;
     }
 }

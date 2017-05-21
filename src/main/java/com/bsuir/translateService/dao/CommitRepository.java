@@ -1,7 +1,6 @@
 package com.bsuir.translateService.dao;
 
 import com.bsuir.translateService.entity.CommitEntity;
-import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -14,7 +13,8 @@ public interface CommitRepository {
     CommitEntity findById(int id);
     Iterable<CommitEntity> findByBranchId(int id);
     CommitEntity findLastCommitInBranch(int branchId);
-    public CommitEntity findFirstCommitInBranch(int branchId);
+    CommitEntity findFirstCommitInBranch(int branchId);
+    CommitEntity findByHash(String hash);
     void createCommit(CommitEntity commitEntity);
     void updateCommit(CommitEntity commitEntity);
     void deleteCommit(CommitEntity commitEntity);

@@ -1,6 +1,7 @@
 package com.bsuir.translateService.dao.impl;
 
 import com.bsuir.translateService.dao.BranchRepository;
+import com.bsuir.translateService.dto.BranchDto;
 import com.bsuir.translateService.entity.BranchEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -48,9 +49,27 @@ public class BranchRepositoryImpl extends BaseRepository implements BranchReposi
     }
 
     @Override
-    public Iterable<BranchEntity> findByEmployeeId(int id) {
+    public Iterable<BranchEntity> findByIdRepository(int id) {
         Session session = GetCurrentSession();
-        Query query = session.createQuery("from BranchEntity u where u.idEmployee = :id");
+        Query query = session.createQuery("from BranchEntity u where u.idRepository = :id");
+        query.setParameter("id", id);
+        List<BranchEntity> list = query.list();
+        return list;
+    }
+
+    @Override
+    public Iterable<BranchEntity> findByIdUser(int id) {
+        Session session = GetCurrentSession();
+        Query query = session.createQuery("from BranchEntity u where u.idUser = :id");
+        query.setParameter("id", id);
+        List<BranchEntity> list = query.list();
+        return list;
+    }
+
+    @Override
+    public Iterable<BranchEntity> findByIdAndMainUser(int id) {
+        Session session = GetCurrentSession();
+        Query query = session.createQuery("from BranchEntity u where u.idUser = :id and  u.isMainUser = 1");
         query.setParameter("id", id);
         List<BranchEntity> list = query.list();
         return list;

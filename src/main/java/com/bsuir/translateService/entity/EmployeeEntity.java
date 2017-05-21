@@ -5,8 +5,8 @@ import javax.persistence.*;
 /**
  * Created by Олег Пятко on 09.05.2017.
  */
-@Entity
-@Table(name = "employee", schema = "git_translate")
+//@Entity
+//@Table(name = "employee", schema = "git_translate")
 public class EmployeeEntity {
     private int idEmployee;
     private int idUser;

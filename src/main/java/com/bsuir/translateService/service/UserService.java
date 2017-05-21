@@ -5,7 +5,6 @@ import com.bsuir.translateService.entity.UserEntity;
 import com.bsuir.translateService.service.exception.ServiceException;
 import com.bsuir.translateService.utils.HelpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;

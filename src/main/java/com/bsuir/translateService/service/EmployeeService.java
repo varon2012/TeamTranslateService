@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * Created by Олег Пятко on 09.05.2017.
  */
-@Service
 public class EmployeeService {
     public Iterable<EmployeeEntity> findAll(){
         return employeeRepository.findAll();

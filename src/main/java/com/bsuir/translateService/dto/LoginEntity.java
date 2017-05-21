@@ -1,4 +1,4 @@
-package com.bsuir.translateService.entity;
+package com.bsuir.translateService.dto;
 
 /**
  * Created by Олег Пятко on 17.05.2017.
