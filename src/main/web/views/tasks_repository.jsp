@@ -2,8 +2,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
+<html>
 <head>
-    <title>Commits</title>
+    <title>Branches</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="<c:url value="/resources/style/style.css"/>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,15 +33,21 @@
     </header>
 
     <div class="page-content">
-        <div class="login-page">
-            <div class="form">
-                <form:form action="new_repo" method="post" modelAttribute="repoEntity" class="login-form">
-                    <p class="login"><b>New Repository</b></p>
-                    <form:input type="text" placeholder="Repository Name" path="repository.name"/>
-                    <form:textarea type="text" placeholder="Plain text" path="plainText"></form:textarea>
-                    <button type="submit">Create</button>
-                </form:form>
+        <h2 class="table-header">Your Tasks</h2>
+        <div class="table-default">
+            <div class="table-default__row _head">
+                <div class="table-default__col _head">User</div>
+                <div class="table-default__col _head">Branch</div>
             </div>
+            <c:forEach  var="task" items="${branches}">
+                <div class="table-default__row" onclick="window.location='/commits/${task.branch.idRepository}'">
+                    <div class="table-default__col">${task.user.login}</div>
+                    <div class="table-default__col">${task.branch.name}</div>
+                </div>
+            </c:forEach>
+            <form method="get" action="/assign_task/${repId}">
+                <button class="compare_button" style="margin: 20px 0" type="submit">Assign Task</button>
+            </form>
         </div>
     </div>
 
@@ -53,4 +60,3 @@
 </body>
 
 </html>
-

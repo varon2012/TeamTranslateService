@@ -14,6 +14,7 @@ public interface InvitationRepository {
     Iterable<InvitationEntity> findByRepositoryId(int id);
     Iterable<InvitationEntity> findByInviterId(int id);
     Iterable<InvitationEntity> findByInvitedId(int id);
+    Iterable<InvitationEntity> findByIdRepositoryAndIsAccepted(int repId);
     void createInvitation(InvitationEntity invitationEntity);
     void updateInvitation(InvitationEntity invitationEntity);
     void deleteInvitation(InvitationEntity invitationEntity);

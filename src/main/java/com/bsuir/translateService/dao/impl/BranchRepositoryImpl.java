@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -78,7 +79,6 @@ public class BranchRepositoryImpl extends BaseRepository implements BranchReposi
     @Override
     public void createBranch(BranchEntity branchEntity) {
         Session session = GetCurrentSession();
-
         session.save(branchEntity);
     }
 

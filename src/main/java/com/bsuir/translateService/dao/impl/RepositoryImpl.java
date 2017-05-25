@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -49,7 +50,7 @@ public class RepositoryImpl extends BaseRepository implements Repository {
     @Override
     public void createRepository(RepositoryEntity repositoryEntity) {
         Session session = GetCurrentSession();
-
+        repositoryEntity.setCreateTime(new Timestamp(System.currentTimeMillis()));
         session.save(repositoryEntity);
     }
 

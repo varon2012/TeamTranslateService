@@ -24,11 +24,8 @@
             <img src="<c:url value="/resources/img/logo.png"/>" class="logo-image">
         </div>
         <div class="top-navigation-bar">
-            <a href="#">
+            <a href="/login">
                 <b>Home</b>
-            </a>
-            <a href="#">
-                <b>About</b>
             </a>
         </div>
     </header>
@@ -36,13 +33,6 @@
     <div class="page-content">
         <div class="login-page">
             <div class="form">
-                <!--	<form class="register-form">
-                        <input type="text" placeholder="name"/>
-                        <input type="password" placeholder="password"/>
-                        <input type="text" placeholder="email address"/>
-                        <button>create</button>
-                        <p class="message">Already registered? <a href="#">Sign In</a></p>
-                    </form>-->
                 <form:form action="auth" method="post" modelAttribute="loginEntity" class="login-form">
                     <form:input type="text" placeholder="username" path="username"/>
                     <form:input type="password" placeholder="password" path="password"/>

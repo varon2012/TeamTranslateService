@@ -1,9 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Олег Пятко
+  Date: 17.05.2017
+  Time: 13:27
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
+<html>
 <head>
-    <title>Commits</title>
+    <title>Branches</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="<c:url value="/resources/style/style.css"/>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,11 +42,17 @@
     <div class="page-content">
         <div class="login-page">
             <div class="form">
-                <form:form action="new_repo" method="post" modelAttribute="repoEntity" class="login-form">
-                    <p class="login"><b>New Repository</b></p>
-                    <form:input type="text" placeholder="Repository Name" path="repository.name"/>
-                    <form:textarea type="text" placeholder="Plain text" path="plainText"></form:textarea>
-                    <button type="submit">Create</button>
+                <h3>Assign Task</h3>
+                <form:form method="post" action="/task/${repId}" modelAttribute="task"  class="register-form">
+                    <form:select style="margin:0 0 20px 0" path="login">
+                        <option value="SELECT USER">SELECT USER</option>
+                        <c:forEach var="user" items="${users}">
+                            <option value="${user.login}">${user.login}</option>
+                        </c:forEach>
+                    </form:select>
+                    <form:input type="text" placeholder="Task Name" path="name"/>
+                    <form:textarea type="text" placeholder="Plain Text" path="plainText"/>
+                    <button type="submit">Assign</button>
                 </form:form>
             </div>
         </div>
@@ -53,4 +67,3 @@
 </body>
 
 </html>
-

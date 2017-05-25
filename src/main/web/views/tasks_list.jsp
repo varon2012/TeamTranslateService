@@ -23,11 +23,14 @@
             <img src="<c:url value="/resources/img/logo.png"/>" class="logo-image">
         </div>
         <div class="top-navigation-bar">
-            <a href="#">
+            <a href="/branch_list">
                 <b>Tasks</b>
             </a>
-            <a href="#">
-                <b>New Repository</b>
+            <a href="/repositories">
+                <b>My Repositories</b>
+            </a>
+            <a href="/invites">
+                <b>Invites</b>
             </a>
             <a href="/logout">
                 <b>Logout</b>
@@ -51,7 +54,7 @@
                 </div>
             </c:forEach>
         </div>
-        <div class="select-container">
+        <div class="select-container" style="display: inline-flex">
             <form:form modelAttribute="selectedCommits" method="post" action="/compare">
                 <form:select path="commit1">
                     <option value="NONE">FIRST COMMIT</option>
@@ -66,6 +69,12 @@
                     </c:forEach>
                 </form:select>
                 <button class="compare_button" type="submit">Compare</button>
+            </form:form>
+            <form:form method="get" action="/new_commit/${branchId}" style="margin: 0 0 0 20px">
+                <button class="compare_button" type="submit" >Add Commit</button>
+            </form:form>
+            <form:form method="get" action="/get_task/${branchId}" style="margin: 0 0 0 20px">
+                <button class="compare_button" type="submit" >Get Plain Text</button>
             </form:form>
         </div>
     </div>

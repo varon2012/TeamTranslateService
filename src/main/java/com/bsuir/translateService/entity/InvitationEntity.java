@@ -13,6 +13,7 @@ public class InvitationEntity {
     private int idInviter;
     private int idRepository;
     private String invitationText;
+    private byte isAccepted;
 
     @Id
     @Column(name = "idInvitation", nullable = false)
@@ -89,5 +90,15 @@ public class InvitationEntity {
         result = 31 * result + idRepository;
         result = 31 * result + (invitationText != null ? invitationText.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "isAccepted", nullable = false)
+    public byte getIsAccepted() {
+        return isAccepted;
+    }
+
+    public void setIsAccepted(byte isAccepted) {
+        this.isAccepted = isAccepted;
     }
 }

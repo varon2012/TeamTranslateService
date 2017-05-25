@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -55,7 +56,7 @@ public class CommitRepositoryImpl extends BaseRepository implements CommitReposi
             return null;
         }
 
-        return list.get(0);
+        return list.get(list.size() - 1);
     }
 
     public CommitEntity findFirstCommitInBranch(int branchId){
@@ -89,6 +90,7 @@ public class CommitRepositoryImpl extends BaseRepository implements CommitReposi
     public void createCommit(CommitEntity commitEntity) {
         Session session = GetCurrentSession();
         commitEntity.setHash(Long.toString(System.nanoTime()).substring(8));
+        commitEntity.setCreateTime(new Timestamp(System.currentTimeMillis()));
         session.save(commitEntity);
     }
 

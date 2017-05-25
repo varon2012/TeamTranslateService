@@ -63,6 +63,15 @@ public class InvitationRepositoryImpl extends BaseRepository implements Invitati
     }
 
     @Override
+    public Iterable<InvitationEntity> findByIdRepositoryAndIsAccepted(int repId) {
+        Session session = GetCurrentSession();
+        Query query = session.createQuery("from InvitationEntity i where i.idRepository = :repId and i.isAccepted = 1");
+        query.setParameter("repId", repId);
+        List<InvitationEntity> list = query.list();
+        return list;
+    }
+
+    @Override
     public void createInvitation(InvitationEntity invitationEntity) {
         Session session = GetCurrentSession();
 

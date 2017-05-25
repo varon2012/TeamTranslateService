@@ -24,11 +24,8 @@
             <img src="<c:url value="/resources/img/logo.png"/>" class="logo-image">
         </div>
         <div class="top-navigation-bar">
-            <a href="#">
+            <a href="/login">
                 <b>Home</b>
-            </a>
-            <a href="#">
-                <b>About</b>
             </a>
         </div>
     </header>

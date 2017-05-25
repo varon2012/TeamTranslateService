@@ -15,11 +15,14 @@
             <img src="<c:url value="/resources/img/logo.png"/>" class="logo-image">
         </div>
         <div class="top-navigation-bar">
-            <a href="#">
+            <a href="/branch_list">
                 <b>Tasks</b>
             </a>
-            <a href="#">
-                <b>New Repository</b>
+            <a href="/repositories">
+                <b>My Repositories</b>
+            </a>
+            <a href="/invites">
+                <b>Invites</b>
             </a>
             <a href="/logout">
                 <b>Logout</b>

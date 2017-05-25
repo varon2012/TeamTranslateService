@@ -25,6 +25,18 @@ public class InvitationService {
         return entity;
     }
 
+    public void create(InvitationEntity invitationEntity){
+        invitationRepository.createInvitation(invitationEntity);
+    }
+
+    public void update(InvitationEntity invitationEntity){
+        invitationRepository.updateInvitation(invitationEntity);
+    }
+
+    public Iterable<InvitationEntity> findByRepIdAndIsAccepted(int repId){
+        return invitationRepository.findByIdRepositoryAndIsAccepted(repId);
+    }
+
     public Iterable<InvitationEntity> findByInviterId(int id){
         return invitationRepository.findByInviterId(id);
     }

@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <head>
@@ -31,16 +30,9 @@
         </div>
     </header>
 
-    <div class="page-content">
-        <div class="login-page">
-            <div class="form">
-                <form:form action="new_repo" method="post" modelAttribute="repoEntity" class="login-form">
-                    <p class="login"><b>New Repository</b></p>
-                    <form:input type="text" placeholder="Repository Name" path="repository.name"/>
-                    <form:textarea type="text" placeholder="Plain text" path="plainText"></form:textarea>
-                    <button type="submit">Create</button>
-                </form:form>
-            </div>
+    <div class="page-content _commit-page">
+        <div class="commit-text-container">
+            ${plainText}
         </div>
     </div>
 
@@ -53,4 +45,3 @@
 </body>
 
 </html>
-

@@ -54,8 +54,11 @@ public class BranchService {
             List<CommitEntity> commits = (List<CommitEntity>) commitService.findByBranchId(branchEntity.getIdBranch());
             dto.setCommitNumber(commits.size());
 
-            String lastCommitMessage = commitService.findLastCommitInBranch(branchEntity.getIdBranch()).getCommitMessage();
-            dto.setLastCommitMessage(lastCommitMessage);
+            CommitEntity commitEntity = commitService.findLastCommitInBranch(branchEntity.getIdBranch());
+            if (commitEntity != null){
+                dto.setLastCommitMessage(commitEntity.getCommitMessage());
+            }
+
 
             String repoName = repositoryService.findById(branchEntity.getIdRepository()).getName();
             dto.setRepositoryName(repoName);
@@ -64,10 +67,6 @@ public class BranchService {
         }
         return result;
     }
-   // public Iterable<BranchEntity> findByEmployeeId(int id){
-   //     return branchRepository.findByEmployeeId(id);
-  //  }
-
     public BranchEntity findByName(String name){
         return branchRepository.findByName(name);
     }
@@ -91,22 +90,6 @@ public class BranchService {
             throw new ServiceException("name cannot be empty");
         }
     }
-
-    /*
-    public Iterable<BranchDto> findBranchesWithCommitInfoByEmployeeId(int employeeId){
-        //Iterable<BranchEntity> branches = branchRepository.findByEmployeeId(employeeId);
-        List<BranchDto> result = new ArrayList<BranchDto>();
-        for (BranchEntity branchEntity: branches) {
-            BranchDto dto = new BranchDto();
-            dto.setEntity(branchEntity);
-            List<CommitEntity> commits = (List<CommitEntity>) commitService.findByBranchId(branchEntity.getIdBranch());
-            dto.setCommitNumber(commits.size());
-            result.add(dto);
-        }
-        return result;
-    }
-*/
-    //private CommitEntity getLatestCommit
 
     private CommitService commitService;
     private RepositoryService repositoryService;

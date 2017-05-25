@@ -37,7 +37,7 @@ public abstract class BaseController {
 
     @Autowired
     private GetTokenService getTokenService;
-    private UserService userService;
+    protected UserService userService;
 
     @Autowired
     public void setUserService(UserService userService) {

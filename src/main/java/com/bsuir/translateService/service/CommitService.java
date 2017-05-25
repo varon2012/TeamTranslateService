@@ -75,6 +75,10 @@ public class CommitService {
         commitRepository.deleteCommit(commitEntity);
     }
 
+    public void updateCommit(CommitEntity commitEntity){
+        commitRepository.updateCommit(commitEntity);
+    }
+
     private CommitRepository commitRepository;
 
     @Autowired

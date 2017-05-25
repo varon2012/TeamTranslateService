@@ -34,11 +34,11 @@
     <div class="page-content">
         <div class="login-page">
             <div class="form">
-                <form:form action="new_repo" method="post" modelAttribute="repoEntity" class="login-form">
-                    <p class="login"><b>New Repository</b></p>
-                    <form:input type="text" placeholder="Repository Name" path="repository.name"/>
-                    <form:textarea type="text" placeholder="Plain text" path="plainText"></form:textarea>
-                    <button type="submit">Create</button>
+                <form:form method="post" action="/new_commit/${branchId}" modelAttribute="commit" class="register-form">
+                    <p class="login"><b>New commit</b></p>
+                    <form:textarea type="text" placeholder="Commit message" path="commitMessage"></form:textarea>
+                    <form:textarea type="text" placeholder="Translated text" path="translatedText"></form:textarea>
+                    <button type="submit">Add</button>
                 </form:form>
             </div>
         </div>

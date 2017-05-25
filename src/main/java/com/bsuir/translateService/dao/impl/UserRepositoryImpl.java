@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.query.Query;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -62,7 +64,9 @@ public class UserRepositoryImpl extends BaseRepository implements UserRepository
     @Override
     public void createUser(UserEntity userEntity) {
         Session session = GetCurrentSession();
-
+        if (userEntity.getCreateTime() == null){
+            userEntity.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        }
         session.save(userEntity);
     }
 

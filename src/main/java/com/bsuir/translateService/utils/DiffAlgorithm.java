@@ -22,13 +22,6 @@ public abstract class DiffAlgorithm<VALUE> {
     private ArrayList<DiffEntry<VALUE>> diff;
     private ArrayList<VALUE> backtrack;
 
-
-    /**
-     * A constructor for classes inheriting this one, allowing them to
-     * do some initialization before setting the values of X and Y.  Once
-     * the initialization is complete, the inheriting class must call
-     * initValues(VALUE[] x, VALUE[] y)
-     */
     protected DiffAlgorithm() {
 
     }

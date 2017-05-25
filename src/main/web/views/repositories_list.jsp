@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <head>
-    <title>Commits</title>
+    <title>Branches</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="<c:url value="/resources/style/style.css"/>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,15 +32,23 @@
     </header>
 
     <div class="page-content">
-        <div class="login-page">
-            <div class="form">
-                <form:form action="new_repo" method="post" modelAttribute="repoEntity" class="login-form">
-                    <p class="login"><b>New Repository</b></p>
-                    <form:input type="text" placeholder="Repository Name" path="repository.name"/>
-                    <form:textarea type="text" placeholder="Plain text" path="plainText"></form:textarea>
-                    <button type="submit">Create</button>
-                </form:form>
+        <h2 class="table-header">Repositories</h2>
+        <div class="table-default">
+            <div class="table-default__row _head">
+                <div class="table-default__col _head">Name</div>
+                <div class="table-default__col _head">Tasks</div>
             </div>
+            <c:forEach var="repository" items="${repositories}">
+                <div class="table-default__row" onclick="window.location='/branch_list/${repository.entity.idRepository}'">
+                    <div class="table-default__col">${repository.entity.name}</div>
+                    <div class="table-default__col">${repository.tasks}</div>
+                </div>
+            </c:forEach>
+        </div>
+        <div class="select-container">
+            <form method="get" action="new_repo">
+                <button class="compare_button" type="submit">New Repository</button>
+            </form>
         </div>
     </div>
 
@@ -53,4 +61,3 @@
 </body>
 
 </html>
-
